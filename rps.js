@@ -9,6 +9,9 @@ function game() {
 function playRound () {
     const playerSelection = playerChoice();
     const computerSelection = computerChoice();
+    console.log(computerSelection);
+    const winner = checkWinner (playerSelection, computerSelection) ;
+    console.log(winner);
 }
 
 function playerChoice() { //function that prompts user to select rock, paper or scissors
@@ -30,9 +33,9 @@ function playerChoice() { //function that prompts user to select rock, paper or 
         }   
         input = input.toLowerCase();  
         check = validateInput(input);
-    }
-
-
+    } 
+    return input;
+}
 
 function computerChoice() {
     return choices[Math.floor(Math.random() * choices.length)]; //returns a random number rounded down multiplied by how many choices there are
@@ -42,5 +45,17 @@ function validateInput (choice) { //function to validate if choice belongs to th
     return choices.includes(choice) //if whatever was input is included in choices array
 }
 
-
-game();
+function checkWinner (choiceP, choiceC) { //function to check who the winner is
+     if (choiceP === choiceC) { 
+    return "It's a tie. Play again.";//if computerSelction and playerSelection are equal 
+     } else if (  
+    (choiceP === "rock" && choiceC === "scissors") ||
+    (choiceP === "paper" && choiceC === "rock") || 
+    (choiceP === "scissors" && choiceC === "paper")//3 conditions that would give us the win
+     ) {
+        return "Well done. You've won that round."; //return you won
+     } else {
+        return "Computer wins."; //otherwise return computer won.
+     } 
+    }
+      game();
